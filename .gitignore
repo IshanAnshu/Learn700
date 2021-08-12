@@ -130,3 +130,6 @@ dmypy.json
 
 # JetBrains stuff
 .idea/
+
+#Random Checks to learn
+**/randomCheck
