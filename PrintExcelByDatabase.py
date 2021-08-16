@@ -24,8 +24,8 @@ def writeDataOnExcel():
     i = 1
     for line1 in file1:
         line1 = line1.strip()
-        ind = line1.find(":")
-        xml_uid = line1[(ind + 2):(len(line1) - 1)]
+        index = line1.find(":")
+        xml_uid = line1[(index + 2):(len(line1) - 1)]
         query = "select state, health_id_number, dist, pincode, created_date, subdist, street from user_ekyc where xml_uid='{xml_uidCopy}';".format(xml_uidCopy=xml_uid)
         cur.execute(query)
         queryResult = cur.fetchall()
@@ -36,12 +36,12 @@ def writeDataOnExcel():
     file1.close()
 
 def main():
+    global conn
     databaseConnect()
     writeColHeads()
     writeDataOnExcel()
     wb.save('OutputRefactored.xls')
     print("Operation done successfully")
-    global conn
     conn.close()
 
 
