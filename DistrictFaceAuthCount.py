@@ -3,7 +3,7 @@ from collections import Counter
 
 def connectExcelInputFile():
     global loc, wb, sheet
-    loc = "DistrictFaceAuthCopy.xlsx"
+    loc = "DistrictFaceAuth.xlsx"
     wb = openpyxl.load_workbook(loc)
     sheet = wb.active
     print('Input Excel File Connected')
@@ -11,22 +11,15 @@ def connectExcelInputFile():
 def makeListOfDist():
     global list
     cellValue13 = sheet.cell(row=1, column=3).value
-    # print(cellValue13)
-    # print(type(cellValue13))
     list = [cellValue13.upper()]
     for i in range(2, sheet.max_row):
         cellValues = sheet.cell(row=i, column=3).value
-        # print(i,type(cellValues))
         if type(cellValues) == str:
             list.append(cellValues.upper())
-        else:
-            break
-    # print(list)
     print('List Created')
 
 def writeToOutputFile():
     count = Counter(list)
-    # print(count)
     wbOutput = openpyxl.Workbook()
     sheetOutput = wbOutput.active
     r = 1
@@ -38,8 +31,8 @@ def writeToOutputFile():
         distCountCell.value = distCount
         r = r + 1
 
-        # print(dist, ":", distCount)
-    wbOutput.save("DistrictFaceAuthCountOutput.xlsx")
+        
+    wbOutput.save("DistrictFaceAuthCountOutput1111.xlsx")
     print('Output File Generated')
 
 def main():
