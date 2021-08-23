@@ -32,7 +32,7 @@ def writeDataOnExcel():
         for eachRow in queryResult:
             for j in range (6):
                 sheet1.write(i, j, eachRow[j])
-         i = i + 1
+        i = i + 1
     file1.close()
 
 def main():
