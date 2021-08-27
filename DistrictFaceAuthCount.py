@@ -31,7 +31,7 @@ def writeToOutputFile():
         distCountCell.value = distCount
         r = r + 1
 
-        
+
     wbOutput.save("DistrictFaceAuthCountOutput1111.xlsx")
     print('Output File Generated')
 
