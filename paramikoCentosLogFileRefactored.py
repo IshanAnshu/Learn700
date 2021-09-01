@@ -13,8 +13,7 @@ def paramiko_Centos(hostname, command):
 
         # connecting paramiko using host
         # name and password
-        client.connect(hostname, port=22, username='centos',
-                       password='')
+        client.connect(hostname, port=22, username='centos',password='dumfold@123456')
         print('SSH Connection Established')
 
         # below line command will actually
@@ -37,23 +36,33 @@ def readLogFile(cmdOutputString):
     failString1 = '"AuthType":"FID","Status":"failed"'
     failString2 = '"AuthType":"FID","Status":"N"'
     emptyAuthType = '"AuthType":""'
-    successCount = 0
-    failCount = 0
-    emptyAuthTypeCount = 0
     successCount = cmdOutputString.count(successString1) + cmdOutputString.count(successString2)
     failCount = cmdOutputString.count(failString1) + cmdOutputString.count(failString2)
     emptyAuthTypeCount = cmdOutputString.count(emptyAuthType)
     return (successCount, failCount, emptyAuthTypeCount)
 
 def printResult(count):
-    print('Successful FaceAuth Count:',count[0])
-    print('Failed FaceAuth Count:', count[1])
-    print('Empty FaceAuth Count:', count[2])
+    print('Final Result is: ')
+    print('Successful FaceAuth Count:',sum(count[0]))
+    print('Failed FaceAuth Count:', sum(count[1]))
+    print('Empty FaceAuth Count:', sum(count[2]))
 
 def main():
+    print('On machine: 1')
     remoteOutput = paramiko_Centos('86.107.243.9', 'cat ishanCode/logFolder/logfile.txt')
-    faceAuthCount = readLogFile(remoteOutput)
-    printResult(faceAuthCount)
+    faceAuthCount1 = readLogFile(remoteOutput)
+    print('On machine: 2')
+    remoteOutput = paramiko_Centos('86.107.243.9', 'cat ishanCode/logFolder2/logfile.txt')
+    faceAuthCount2 = readLogFile(remoteOutput)
+    print('On machine: 3')
+    remoteOutput = paramiko_Centos('86.107.243.9', 'cat ishanCode/logFolder3/logfile.txt')
+    faceAuthCount3 = readLogFile(remoteOutput)
+    print('On machine: 4')
+    remoteOutput = paramiko_Centos('86.107.243.9', 'cat ishanCode/logFolder4/logfile.txt')
+    faceAuthCount4 = readLogFile(remoteOutput)
+    countResultZipObj = zip(faceAuthCount1,faceAuthCount2,faceAuthCount3,faceAuthCount4)
+    countResultList = list(countResultZipObj)
+    printResult(countResultList)
 
 if __name__=='__main__':
     main()
