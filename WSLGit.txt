@@ -1,2 +1,4 @@
 This is to test WSL Ubuntu Multi User git functioning
 This edit is to test changed user in WSL Ubuntu terminal git usage
+
+This edit is to check for git bash functioning.
